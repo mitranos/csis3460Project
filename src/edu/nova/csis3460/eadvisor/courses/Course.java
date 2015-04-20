@@ -6,15 +6,17 @@ import java.util.*;
 /*  Course: holds information about the courses for all the degrees in eAdvisor
 */  
 
-private String title;
-private String description;
-private int credits;
-private String outcomes;
-private courseOffering courseOffering = new courseOffering();
-public final boolean IS_MINIMUM_LEVEL = false;
-
 public class Course{
 
+	private String title;
+	private String description;
+	private int credits;
+	private String outcomes;
+	private String courseNumber;
+	private String prefix;
+	private CourseOffering courseOffering = new CourseOffering();
+	public boolean IS_MINIMUM_LEVEL = false;
+	
     public Course(String title, String description, int credits, String outcomes){
     	title = this.title;
     	description = this.description;
@@ -38,7 +40,15 @@ public class Course{
     	return outcomes;
     }
     
-    public courseOffering getCourseOffering(){
+    public String getCourseNumber(){
+    	return courseNumber;
+    }
+    
+    public String getPrefix(){
+    	return prefix;
+    }
+    
+    public CourseOffering getCourseOffering(){
     	return courseOffering;
     }
     
@@ -55,8 +65,8 @@ public class Course{
     }
     
     public static void test(){
-    	Course course  = new Course(); 
-        aClassName.print();
+    	Course course  = new Course("Calculus", "Calculusi is the study of math", 4, "outcomes"); 
+    	course.print();
     }
 
     public static void main(String[] args){
