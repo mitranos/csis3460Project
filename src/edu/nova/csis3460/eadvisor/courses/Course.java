@@ -1,7 +1,5 @@
 package edu.nova.csis3460.eadvisor.courses;
 
-import java.util.*;
-
 /**
 /*  Course: holds information about the courses for all the degrees in eAdvisor
 */  
@@ -12,14 +10,16 @@ public class Course{
 	private String description;
 	private int credits;
 	private String outcomes;
-	private String courseNumber;
+	private Integer courseNumber;
 	private String prefix;
 	private CourseOffering courseOffering = new CourseOffering();
 	public boolean IS_MINIMUM_LEVEL = false;
 	
-    public Course(String title, String description, int credits, String outcomes){
+    public Course(String title, String description, String prefix, int courseNumber, int credits, String outcomes){
     	title = this.title;
     	description = this.description;
+    	prefix = this.prefix;
+    	courseNumber = this.courseNumber;
     	credits = this.credits;
     	outcomes = this.outcomes;
     }
@@ -40,7 +40,7 @@ public class Course{
     	return outcomes;
     }
     
-    public String getCourseNumber(){
+    public int getCourseNumber(){
     	return courseNumber;
     }
     
@@ -65,7 +65,7 @@ public class Course{
     }
     
     public static void test(){
-    	Course course  = new Course("Calculus", "Calculusi is the study of math", 4, "outcomes"); 
+    	Course course  = new Course("Calculus", "Calculus is the study of math", "MATH", 4000, 4, "outcomes"); 
     	course.print();
     }
 
