@@ -11,6 +11,7 @@ private String description;
 private int credits;
 private String outcomes;
 private courseOffering courseOffering = new courseOffering();
+public final boolean IS_MINIMUM_LEVEL = false;
 
 public class Course{
 
@@ -39,6 +40,14 @@ public class Course{
     
     public courseOffering getCourseOffering(){
     	return courseOffering;
+    }
+    
+    public void setMinimumLeveltoTrue(){
+    	IS_MINIMUM_LEVEL = true;
+    }
+    
+    public void setMinimumLeveltoFalse(){
+    	IS_MINIMUM_LEVEL = false;
     }
      
     public void print(){
