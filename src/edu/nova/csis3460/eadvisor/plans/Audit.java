@@ -7,6 +7,9 @@
 
 package edu.nova.csis3460.eadvisor.plans;
 
+import edu.nova.csis3460.eadvisor.requirements.*;
+import edu.nova.csis3460.eadvisor.courses.*;
+
 import java.util.*;
 
 public class Audit {
