@@ -1,24 +1,20 @@
 package edu.nova.csis3460.eadvisor.courses;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
+
 
 import edu.nova.csis3460.eadvisor.core.*;
 
 public class StudentCourseHistory {
 	private static Student student;
 	private static Course course;
-	private static ArrayList<CourseHistory> courseHistoryList; 
-	private static ArrayList<CourseHistory> TestCourse; 	
+	private static ArrayList<StudentCourse> courseHistoryList; 
+	private static ArrayList<StudentCourse> TestCourse; 	
 	private static ArrayList<Integer> courseCRN;
 
-	
-    public StudentCourseHistory(Student student){
-    	student = this.student;
-    }
     
     public void addCourseToHistory(Course course, String semester, Character grade, Integer crn){
-    	courseHistoryList.add(new CourseHistory(course, semester, grade, crn));
+    	courseHistoryList.add(new StudentCourse(course, semester, grade, crn));
     }
     
 	/* Return the grade for a course when we pass a "course number" and a "prefix" (example: 3000, MATH -- meaning MATH3000). 
@@ -32,8 +28,8 @@ public class StudentCourseHistory {
 		return null;
     }
 	
-	public ArrayList<CourseHistory> getCoursesWithPrefix(String prefix) {
-		ArrayList<CourseHistory> temp = new ArrayList<CourseHistory>();
+	public List<StudentCourse> getCoursesWithPrefix(String prefix) {
+		ArrayList<StudentCourse> temp = new ArrayList<StudentCourse>();
 		for(int i=0; i < courseHistoryList.size(); i++){
 			if(courseHistoryList.get(i).getCourse().getPrefix().equals(prefix))
 				temp.add(courseHistoryList.get(i));
@@ -41,7 +37,7 @@ public class StudentCourseHistory {
 		return temp;
 	}
 	
-	public ArrayList<CourseHistory> getEntireHistory() {
+	public List<StudentCourse> getEntireHistory() {
 		return courseHistoryList;
 	}
 	

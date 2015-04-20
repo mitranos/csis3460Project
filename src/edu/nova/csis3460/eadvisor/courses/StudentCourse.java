@@ -1,13 +1,13 @@
 package edu.nova.csis3460.eadvisor.courses;
 
-public class CourseHistory
+public class StudentCourse
 {
 	public Course course = null;
 	public String semester = null;
 	public Character grade = null;
 	public Integer crn = null;
 	
-	public CourseHistory (Course course, String semester, Character grade, Integer crn)
+	public StudentCourse (Course course, String semester, Character grade, Integer crn)
 	{
 		course = this.course;
 		semester = this.semester;
