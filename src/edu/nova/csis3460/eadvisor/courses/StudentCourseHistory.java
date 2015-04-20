@@ -32,8 +32,13 @@ public class StudentCourseHistory {
 		return null;
     }
 	
-	public ArrayList<Course> getCoursesWithPrefix(String prefix) {
-		
+	public ArrayList<CourseHistory> getCoursesWithPrefix(String prefix) {
+		ArrayList<CourseHistory> temp = new ArrayList<CourseHistory>();
+		for(int i=0; i < courseHistoryList.size(); i++){
+			if(courseHistoryList.get(i).getCourse().getPrefix().equals(prefix))
+				temp.add(courseHistoryList.get(i));
+		}
+		return temp;
 	}
 	
 	public ArrayList<CourseHistory> getEntireHistory() {
