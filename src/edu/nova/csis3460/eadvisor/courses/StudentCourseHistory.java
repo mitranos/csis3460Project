@@ -10,7 +10,14 @@ public class StudentCourseHistory {
 
     public StudentCourseHistory(){
 
-    } 
+    }
+    
+	/* Return the grade for a course when we pass a "course number" and a "prefix" (example: 3000, MATH -- meaning MATH3000). 
+	 * It can return null if no grade for the course number exists
+	 */
+	public Character getGrade(Integer courseNumber, String prefix) {
+		return null;
+    }
      
     public static void print(){
         System.out.println("List of Courses needed");
