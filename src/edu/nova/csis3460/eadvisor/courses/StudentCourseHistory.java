@@ -1,5 +1,7 @@
 package edu.nova.csis3460.eadvisor.courses;
 
+import edu.nova.csis3460.eadvisor.core.Student;
+
 import java.util.*;
 
 
@@ -7,14 +9,15 @@ import edu.nova.csis3460.eadvisor.core.*;
 
 public class StudentCourseHistory {
 	private static Student student;
-	private static Course course;
-	private static ArrayList<StudentCourse> courseHistoryList; 
-	private static ArrayList<StudentCourse> TestCourse; 	
-	private static ArrayList<Integer> courseCRN;
+	private static ArrayList<StudentCourse> courseHistoryList = new ArrayList();
+	
+	public StudentCourseHistory(Student student) {
+		this.student = student;
+	}
 
     
-    public void addCourseToHistory(Course course, String semester, Character grade, Integer crn){
-    	courseHistoryList.add(new StudentCourse(course, semester, grade, crn));
+    public void addCourseToHistory(StudentCourse studentCourse){
+    	courseHistoryList.add(studentCourse);
     }
     
 	/* Return the grade for a course when we pass a "course number" and a "prefix" (example: 3000, MATH -- meaning MATH3000). 
@@ -37,28 +40,29 @@ public class StudentCourseHistory {
 		return temp;
 	}
 	
+	public void removeCoursesWithPrefixAndCourseNumber(String prefix, Integer courseNumber) {
+		for(int i=0; i < courseHistoryList.size(); i++){
+			if(courseHistoryList.get(i).getCourse().getPrefix().equals(prefix) && courseHistoryList.get(i).getCourse().getCourseNumber() == courseNumber) {
+				courseHistoryList.remove(courseHistoryList.get(i));
+				break;
+				}
+			}
+	}
+	
 	public List<StudentCourse> getEntireHistory() {
 		return courseHistoryList;
 	}
 	
     public static void print(){
-        System.out.println("List of Courses needed");
+                System.out.println("Student Credientials: " + student.getFirstName() + " " + student.getLastName() + "\n" + "List of Courses already taken");
         
-        for (int i = 0; i < TestCourse.size() - 1; i++)
+        for (int i = 0; i < courseHistoryList.size(); i++)
         {
         	 System.out.println(
-        			 TestCourse.get(i).semester + " " + 
-        			 TestCourse.get(i).grade + " " + TestCourse.get(i).crn); 
-        }
-        
-        System.out.println(" ");
-        System.out.println("List of Courses already taken");
-        
-        for (int i = 0; i < courseHistoryList.size() - 1; i++)
-        {
-        	 System.out.println(
-        			 courseHistoryList.get(i).semester + " " + 
-        			 courseHistoryList.get(i).grade + " " + courseHistoryList.get(i).crn); 
+        			 courseHistoryList.get(i).getSemester() + " " +
+        			 courseHistoryList.get(i).getCRN() + " " +
+        			 courseHistoryList.get(i).getCourse().getTitle() + " " +
+        			 courseHistoryList.get(i).getGrade()); 
         }
     }
     /*
@@ -115,9 +119,5 @@ public class StudentCourseHistory {
     	
     }
     */
-    public static void main(String[] args){
-    	
-        StudentCourseHistory.print();
-    }  
 }
 

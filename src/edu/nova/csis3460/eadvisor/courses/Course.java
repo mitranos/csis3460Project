@@ -10,18 +10,18 @@ public class Course{
 	private String description;
 	private int credits;
 	private String outcomes;
-	private Integer courseNumber;
+	private int courseNumber;
 	private String prefix;
 	private CourseOffering courseOffering = new CourseOffering();
 	public boolean IS_MINIMUM_LEVEL = false;
 	
     public Course(String title, String description, String prefix, int courseNumber, int credits, String outcomes){
-    	title = this.title;
-    	description = this.description;
-    	prefix = this.prefix;
-    	courseNumber = this.courseNumber;
-    	credits = this.credits;
-    	outcomes = this.outcomes;
+    	this.title = title;
+    	this.description = description;
+    	this.prefix = prefix;
+    	this.courseNumber = courseNumber;
+    	this.credits = credits;
+    	this.outcomes = outcomes;
     }
     
     public String getTitle(){
@@ -68,8 +68,4 @@ public class Course{
     	Course course  = new Course("Calculus", "Calculus is the study of math", "MATH", 4000, 4, "outcomes"); 
     	course.print();
     }
-
-    public static void main(String[] args){
-    	Course.test();
-    }  
 }

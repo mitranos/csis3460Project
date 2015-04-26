@@ -2,17 +2,19 @@ package edu.nova.csis3460.eadvisor.courses;
 
 public class StudentCourse
 {
-	public Course course = null;
-	public String semester = null;
-	public Character grade = null;
-	public Integer crn = null;
+	private Course course;
+	private String section;
+	private String semester;
+	private Character grade;
+	private Integer crn;
 	
-	public StudentCourse (Course course, String semester, Character grade, Integer crn)
+	public StudentCourse (Course course, String section, String semester, Character grade, Integer crn)
 	{
-		course = this.course;
-		semester = this.semester;
-		grade = this.grade;
-		crn = this.crn;
+		this.course = course;
+		this.section = section;
+		this.semester = semester;
+		this.grade = grade;
+		this.crn = crn;
 	}
 	
 	public Course getCourse(){
@@ -21,5 +23,17 @@ public class StudentCourse
 	
 	public Character getGrade(){
 		return grade;
+	}
+	
+	public String getSection(){
+		return section;
+	}
+	
+	public String getSemester(){
+		return semester;
+	}
+	
+	public Integer getCRN(){
+		return crn;
 	}
 }
