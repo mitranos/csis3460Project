@@ -28,8 +28,8 @@ public class Student extends User {
 
 	public static Student studentList[] = new Student[2];
 
-	Student() {}
-	Student(String firstName, String lastName, String novaId)
+	public Student() {}
+	public Student(String firstName, String lastName, String novaId)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
