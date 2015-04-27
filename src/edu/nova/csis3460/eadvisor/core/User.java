@@ -12,6 +12,7 @@
  * Updates:     Initial Template (Nicky Alvarez - 04/16) v1.0
  * 				Updated and Created Working User Class (Ali Hussein - 04/18) v2.0
  * 				Added Package and updated datamembers. (Christopher Yowell - 04/19) v3.0
+ * 				Verified and confirmed that variables match. (Evelyn Comrie - 04/25) v4.0
  *
  * (c) Copyright 2015 All rights reserved.
  *
@@ -23,40 +24,45 @@ public class User {
 
 	protected String firstName;
 	protected String lastName;
-	protected String novaId;
+	protected int nsuId;
 
-	public User(){
-		
+	public User(String firstName, String lastName, int nsuId){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.nsuId = nsuId;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
-
-
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
-
 	public String getLastName() {
 		return lastName;
 	}
-
-
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public int getnsuId() {
+		return nsuId;
 	}
+
+	public void setnsuID(int nsuId) {
+		this.nsuId = nsuId;
+	}
+
+	public static void test() {
+		User user = new User("test","test",123456789);
+	}
+
+	//public static void main(String[] args) {
+	//	User.test();
+	//}
 
 }
 

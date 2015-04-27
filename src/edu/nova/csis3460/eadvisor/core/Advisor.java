@@ -13,6 +13,9 @@
  * 				Edited Minor Function Layouts (Evelyn Comrie - 04/18) v2.0
  * 				Added Package and edited code to inherit from User. Also updated 
  * 				datamembers. (Christopher Yowell - 04/19) v3.0
+ * 				Verified and confirmed that variables match. (Evelyn Comrie - 
+ * 				04/25) v4.0
+ * 				Updated login process for testing purposes (Nicky Alvarez - 04/26) v6.0
  *
  * (c) Copyright 2015 All rights reserved.
  *
@@ -22,56 +25,30 @@ package edu.nova.csis3460.eadvisor.core;
 
 import java.util.Scanner;
 
-public class Advisor extends User {
-	public String[] usernames = new String[2];
-	public String[] passwords = new String[2];
+public class Advisor extends User{
 
-	Advisor() {}
-	public Advisor(String firstName, String lastName, String novaId){
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.novaId = novaId;	
-		usernames[0] = "advisor";
-		passwords[0] = "password";
+   
+   public Advisor(String firstName, String lastName, int nsuId) {
+		super(firstName, lastName, nsuId);
 	}
-	public void print(){
 
-		System.out.println("-------------------------------");
-		System.out.println("         Advisor Menu");
-		System.out.println();
-		System.out.print("Username: ");
-		Scanner scanner = new Scanner(System.in);
-		String userName = scanner.next();
-		System.out.print("Password: ");
-		String password = scanner.next();
-		System.out.println("-------------------------------");
-		System.out.println();
-
-		boolean isUsernameValid = false;
-		boolean isPasswordValid = false;
-
-		for (String temp : usernames) {
-			if (temp.equals(userName) && userName.equals("advisor")) {
-				isUsernameValid = true;
-			}
-		}
-		for (String temp : passwords) {
-			if (temp.equals(password) && password.equals("password")) {
-				isPasswordValid = true;
-			}
-		}
-
-		if (isUsernameValid && isPasswordValid) {
+public void print(){
+ 
 			System.out.println("-------------------------------");
+			System.out.println("-------------------------------");
+			System.out.println("");
 			System.out.println("      Welcome Advisor!");
 			System.out.println();
 			System.out.println("1. Under Construction");
 			System.out.println("2. Under Construction");
 			System.out.println("3. Under Construction");
 			System.out.println("4. Log Out");
+			System.out.println("");
 			System.out.println("-------------------------------");
-			System.out.println();
+			System.out.println("-------------------------------");
+			System.out.println("");
 
+			Scanner scanner = new Scanner(System.in);
 			int input = scanner.nextInt();
 			switch (input) {
 			case 1:
@@ -89,13 +66,13 @@ public class Advisor extends User {
 				break;
 			}
 		}
-	}
+
 	public static void test(){
-		Advisor advisor=new Advisor();
+		Advisor advisor=new Advisor("test","test",123456789);
 		advisor.print();
 	}
 
-	public static void main(String[] args){
-		Advisor.test();
-	}
+	//public static void main(String[] args){
+	//        Advisor.test();
+	//}
 }

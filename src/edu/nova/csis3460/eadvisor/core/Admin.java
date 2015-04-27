@@ -13,6 +13,9 @@
  * 				Edited Minor Function Layouts (Evelyn Comrie - 04/18) v2.0
  * 				Added Package and edited code to inherit from User. Also updated 
  * 				datamembers. (Christopher Yowell - 04/19) v4.0
+ * 				Verified and confirmed that variables match. (Evelyn Comrie - 
+ * 				04/25) v5.0
+ * 				Updated login process for testing purposes (Nicky Alvarez - 04/26) v6.0
  *
  * (c) Copyright 2015 All rights reserved.
  *
@@ -22,80 +25,54 @@ package edu.nova.csis3460.eadvisor.core;
 
 import java.util.Scanner;
 
-public class Admin extends User {
 
-	public String[] usernames = new String[2];
-	public String[] passwords = new String[2];
+public class Admin extends User{
 
-	Admin() {}
-	public Admin(String firstName, String lastName, String novaId) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.novaId = novaId;	
-		usernames[0] = "admin";
-		passwords[0] = "password";
+    public Admin(String firstName, String lastName, int nsuId) {
+		super(firstName, lastName, nsuId);
 	}
 
 	public void print() {
-
-		System.out.println("-------------------------------");
-		System.out.println("     Administrator Menu");
-		System.out.println();
-		System.out.print("Username: ");
-		Scanner scanner = new Scanner(System.in);
-		String userName = scanner.next();
-		System.out.print("Password: ");
-		String password = scanner.next();
-		System.out.println("-------------------------------");
-		boolean isUsernameValid = false;
-		boolean isPasswordValid = false;
-		for (String temp : usernames) {
-			if (temp.equals(userName) && userName.equals("admin")) {
-				isUsernameValid = true;
-				break;
-			}
-		}
-		for (String temp : passwords) {
-			if (temp.equals(password) && password.equals("nova")) {
-				isPasswordValid = true;
-				break;
-			}
-		}
-
-		if (isUsernameValid && isPasswordValid) {
-			System.out.println("-------------------------------");
-			System.out.println("      Welcome Admin!");
-			System.out.println();
-			System.out.println("1. Under Construction");
-			System.out.println("2. Under Construction");
-			System.out.println("3. Under Construction");
-			System.out.println("4. Log Out");
-			System.out.println("-------------------------------");
+    	
+            System.out.println("-------------------------------");
+            System.out.println("-------------------------------");
+            System.out.println("");
+            System.out.println("        Welcome Admin");
+            System.out.println("");
+            System.out.println("1.Under Construction");
+            System.out.println("2.Under Construction");
+            System.out.println("3.Under Construction");
+            System.out.println("4.Log Out");
+            System.out.println("");
+            System.out.println("-------------------------------");
+            System.out.println("-------------------------------");
+            System.out.println("");
+           
+            Scanner scanner = new Scanner(System.in);
 			int input = scanner.nextInt();
-			switch (input) {
-			case 1:
-				System.out.println("Under Contruction. Try again later.");
-				break;
-			case 2:
-				System.out.println("Under Contruction. Try again later.");
-				break;
-			case 3:
-				System.out.println("Under Contruction. Try again later.");
-				break;
-			case 4:
-				eAdvisor eadvisor=new eAdvisor();
-				eadvisor.print();
-				break;
-			}
-		}
-	}
+            switch (input) {
+                case 1:
+                    System.out.println("Under Contruction. Try again later.");
+                    break;
+                case 2:
+                    System.out.println("Under Contruction. Try again later.");
+                    break;
+                case 3:
+                    System.out.println("Under Contruction. Try again later.");
+                    break;
+                case 4:
+                    eAdvisor eadvisor=new eAdvisor();
+                    eadvisor.print();
+                    break;
+            }
+        }
 
-	public static void test() {
-		Admin admin = new Admin();
-		admin.print();
-	}
+    public static void test() {
+       Admin admin = new Admin("test","test",123456789);
+        admin.print();
+    }
 
-	public static void main(String[] args) {
-		Admin.test();
-	}
+    //public static void main(String[] args){  
+    //    Admin.test();
+    //}
 }

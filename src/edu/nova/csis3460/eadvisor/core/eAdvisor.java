@@ -14,41 +14,31 @@
  * 				Added Main Functions Required for eAdvisor (Ali Hussein - 04/18) v3.0
  * 				Added Package and edited code to inherit from User. Also created 
  * 				an ArrayList of Users. (Christopher Yowell - 04/19) v4.0
+ * 				Verified and confirmed that variables match. (Evelyn Comrie - 04/25) v5.0
+ * 				Updated code to match other related teams. (Ali Hussein - 04/25) v6.0
+ * 				Added maintainCourseOfferings() as well as etCourseOffering() (Christopher 
+ * 				Yowell - 04/27) v7.0
  *
  * (c) Copyright 2015 All rights reserved.
  *
  */
+
 package edu.nova.csis3460.eadvisor.core;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import edu.nova.csis3460.eadvisor.courses.Course;
+import edu.nova.csis3460.eadvisor.requirements.DegreeProgram;
+
 public class eAdvisor {
 
-	private ArrayList<User> users;
-	//	private ArrayList<DegreeProgram> degreePrograms = new ArrayList<DegreeProgram>();
-	//	private ArrayList<Course> courses = new ArrayList<Course>();
+	private ArrayList<DegreeProgram> degreePrograms = new ArrayList<DegreeProgram>();
+	private ArrayList<Course> courses = new ArrayList<Course>();
 
-	public eAdvisor(){
-		users = new ArrayList<User>();
-	}
-
-	public void addStudent(String firstName, String lastName, String novaId)
-	{
-		users.add(new Student(firstName,lastName,novaId));
-	}
-
-	public void addAdvisor(String firstName, String lastName, String novaId)
-	{
-		users.add(new Advisor(firstName,lastName,novaId));
-	}
-
-	public void addAdmin(String firstName, String lastName, String novaId)
-	{
-		users.add(new Admin(firstName,lastName,novaId));
-	}
-
-	/*public void addDegreeProgram(DegreeProgram degreeProgram)
+	public void addDegreeProgram(DegreeProgram degreeProgram)
 	{
 		this.degreePrograms.add(degreeProgram);
 	}
@@ -90,12 +80,12 @@ public class eAdvisor {
 		return dp;
 	}
 
-	public Course getCourse(String CRN)
+	public Course getCourse(String name)
 	{
-		Course course= new Course();
+		Course course= new Course("","","",0,0,"");
 		for (int i=0; i<this.courses.size();i++)
 		{
-			if (CRN == this.courses.get(i).getCRN())
+			if (name == this.courses.get(i).getTitle())
 			{
 				course= this.courses.get(i);
 			}
@@ -103,56 +93,76 @@ public class eAdvisor {
 		return course;
 	}
 
-	public getCourseOffering(String name)
+	public CourseOffering getCourseOffering(String name)
 	{
 		CourseOffering co= new CourseOffering();
 		for (int i=0; i<this.courses.size();i++)
 		{
-			if (this.courses.get(i).getName() == name)
+			if (this.courses.get(i).getTitle() == name)
 			{
 				co= this.courses.get(i).getCourseOffering();
 			}
+		
+	}
 		return co;
 	}
-	 */
+	
+	public void maintainCourseOffering(String name)
+	{
+		
+		CourseOffering tempCo = getCourseOffering(name);
+		//code that calls setters on CourseOffering i.e. setSemester();
+		// to maintain CourseOffering data
+		setCourseOffering(tempCo, name);
+		
+	}
+	
+	public CourseOffering setCourseOffering(CourseOffering co, String name){
+		getCourseOffering(name) = co;
+	
+	}
 
 	public void print(){
 
+		//main menu of the program
+		System.out.println("-------------------------------");
 		System.out.println("-------------------------------");
 		System.out.println("        eAdvisor Program       ");
 		System.out.println();
-		System.out.println("1. Student");
-		System.out.println("2. Administrator");
-		System.out.println("3. Advisor");
-		System.out.println("4. Exit");
+		System.out.println("1.Student");
+		System.out.println("2.Administrator");
+		System.out.println("3.Advisor");
+		System.out.println("4.Exit");
+		System.out.println();
 		System.out.println("-------------------------------");
-
+		System.out.println("-------------------------------");
+		System.out.println("");
+		
+		//get user inputs
 		Scanner scanner=new Scanner(System.in);
 		int input=scanner.nextInt();
 		switch(input){
 		case 1:
-			Student student=new Student();
+			Student student=new Student("test","test",123456789);
 			student.print();
 			break;
 		case 2:
-			Admin admin=new Admin();
+			Admin admin=new Admin("test","test",123456789);
 			admin.print();
 			break;
 		case 3:
-			Advisor advisor=new Advisor();
+			Advisor advisor=new Advisor("test","test",123456789);
 			advisor.print();
 			break;
 		}
 	}
-
 	public static void test(){
 		eAdvisor eadvisor=new eAdvisor();
 		eadvisor.print();
-
 	}
-
-	public static void main(String[] args){
+	public static void main(String[] args) throws FileNotFoundException{
 		eAdvisor.test();
 	} 
 }
+
 
