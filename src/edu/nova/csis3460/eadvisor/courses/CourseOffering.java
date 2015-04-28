@@ -22,7 +22,7 @@ public class CourseOffering {
 		Semester[0] = 201530; // Arbitrary Semester codes
     	Semester[1] = 201550;
     	Semester[2] = 201550;
-    	Semester[3] = 201520;	
+    	Semester[3] = 201520;	  
     	Semester[4] = 201520;
     	Semester[5] = 201630;
     	Semester[6] = 201650;
@@ -47,7 +47,7 @@ public class CourseOffering {
     	Semester[25] = 202130;
 		
     } 	
-	public boolean isAvaliable(int semesterCode){	
+	/*public boolean isAvaliable(int semesterCode){	
 		for(int i = 0; i< ARR_MAX; i++)
 		{
 			if( semesterCode == Semester[i]) {
@@ -55,6 +55,76 @@ public class CourseOffering {
 			}
 		}
 		return false;
+	}*/
+	public boolean isAvaliable(int semesterCode){	
+		
+			if( ( (semesterCode % 100) == 20) && ( ((semesterCode/100)%2) == 0) ){
+				this.isFall = true;
+				this.isEvenYear = true;
+				
+				this.isOddYear = false;
+				this.isWinter = false;
+				this.isSummer = false;
+			}else if( ( (semesterCode % 100) == 20) && ( ((semesterCode/100)%2) != 0) ){
+				this.isFall = true;
+				this.isOddYear = true;
+				
+				this.isEvenYear = false;
+				this.isWinter = false;
+				this.isSummer = false;
+			}
+			if( ( (semesterCode % 100) == 30) && ( ((semesterCode/100)%2) == 0) ){
+				this.isWinter = true;
+				this.isEvenYear = true;
+				
+				this.isOddYear = false;
+				this.isFall = false;
+				this.isSummer = false;
+			}else if( ( (semesterCode % 100) == 30) && ( ((semesterCode/100)%2) != 0) ){
+				this.isWinter = true;
+				this.isOddYear = true;
+				
+				this.isEvenYear = false;
+				this.isFall = false;
+				this.isSummer = false;
+			}
+			if( ( (semesterCode % 100) == 50) && ( ((semesterCode/100)%2) == 0) ){
+				this.isSummer = true;
+				this.isEvenYear = true;
+				
+				this.isOddYear = false;
+				this.isWinter = false;
+				this.isFall = false;
+			}else if( ( (semesterCode % 100) == 50) && ( ((semesterCode/100)%2) != 0) ){
+				this.isSummer = true;
+				this.isOddYear = true;
+				
+				this.isEvenYear = false;
+				this.isWinter = false;
+				this.isFall = false;
+			}
+			else
+			System.out.println("This course is not avaliable.");
+			return false;
+	}
+	public String getCourseOfferingToString(){
+		String stuff = "";
+		if (isFall == true && isWinter == false && isSummer == false){
+			stuff = "This course is offered in Fall.";
+		}else if (isFall == false && isWinter == true && isSummer == false){
+			stuff = "This course is offered in Winter.";
+		}else if (isFall == false && isWinter == false && isSummer == true){
+			stuff = "This course is  offered in Summer.";
+		}else if (isFall == true && isWinter == true && isSummer == false){
+			stuff = "This course is offered in Fall and Winter.";
+		}else if (isFall == true && isWinter == true && isSummer == true){
+			stuff = "This course is offered in Fall, Winter and Summer.";
+		}else {
+			stuff = "Course not offered.";
+		}
+		
+		return stuff;
+		
 	}
 	@SuppressWarnings("deprecation")
 	public int[] futureOfferings(Date after, int number){
@@ -174,9 +244,12 @@ public class CourseOffering {
     	Semester[25] = 202130;
         aClassName.print(course, 204580);
         testArray = aClassName.futureOfferings(testDate,5);
-        for(int i = 0; i < 5; i++){
-        System.out.println(testArray[i]);
-        }
+        //for(int i = 0; i < 5; i++){
+        //System.out.println(testArray[i]);
+    	//}
+        aClassName.isAvaliable(201520);
+        System.out.println(aClassName.getCourseOfferingToString());
+       
     }
 
     public static void main(String[] args){
