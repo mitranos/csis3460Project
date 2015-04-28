@@ -1,11 +1,11 @@
 package edu.nova.csis3460.eadvisor.requirements;
 
-import edu.nova.csis3460.eadvisor.plans.*;
+import edu.nova.csis3460.eadvisor.exception.EAdvisorException;
 
 public class DataInputError extends EAdvisorException {
 
 	public DataInputError(String string) {
-		super();
+		super(string);
 	}
 
 }

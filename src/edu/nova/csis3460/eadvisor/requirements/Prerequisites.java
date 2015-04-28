@@ -7,7 +7,16 @@ public class Prerequisites extends RequirementsGroup {
 	}
 	
 	public Prerequisites clone() throws CloneNotSupportedException {
-		return (Prerequisites) super.clone();
+		Prerequisites ret = new Prerequisites(this.getName());
+		RequirementsGroup temp = super.clone();
+		ret.andRequirements = temp.andRequirements;
+		ret.orRequirements = temp.orRequirements;
+		ret.isMet = temp.isMet;
+		return ret;
+	}
+	
+	public String toString() {
+		return "Prerequisites\n"+super.toString();
 	}
 
 }

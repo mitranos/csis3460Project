@@ -8,6 +8,8 @@ package edu.nova.csis3460.eadvisor.plans;
 
 import java.util.ArrayList;
 
+import edu.nova.csis3460.eadvisor.requirements.DegreeRequirements;
+
 public class GraduationPlan {
 
     public GraduationPlan(){

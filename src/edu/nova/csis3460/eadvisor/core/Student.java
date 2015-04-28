@@ -25,7 +25,7 @@
  *
  */
 
-//package edu.nova.csis3460.eadvisor.core;
+package edu.nova.csis3460.eadvisor.core;
 
 import java.util.Scanner;
 import java.io.BufferedWriter;
@@ -133,7 +133,7 @@ public class Student extends User{
 			break;
 
 		case 2:
-			GraduationPlan.printGradPlan();
+			//GraduationPlan.printGradPlan();
 			
 			 try {
  

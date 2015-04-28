@@ -1,72 +1,45 @@
 package edu.nova.csis3460.eadvisor.requirements;
 
-import edu.nova.csis3460.eadvisor.core.*;
 import edu.nova.csis3460.eadvisor.courses.*;
+import edu.nova.csis3460.eadvisor.core.*;
 
 import java.util.*;
 
 public class Requirement implements Cloneable {
 	private Boolean isMet = null;
 	private String requirementName;
-	private Integer courseNumber = null;
-	private boolean isCourseRequirement = false;
-	private boolean isCreditRequirement = false;
 	private Integer minCredits = null;
-	private String coursePrefix = null;
+	private List<String> coursePrefixes = null;
 	private Integer minLevel = null;
 
 	protected Requirement(String name) {
 		this.requirementName = name;
 	}
 	
-	public static Requirement newCourseRequirement(String name, String prefix, int courseNumber, int minCredits) throws DataInputError {
-		if(name == null) throw new DataInputError("Input arguments cannot be null.");
-		return new Requirement(name)
-									.setCourseNumber(courseNumber)
-									.setCoursePrefix(prefix)
-									.setMinCredits(minCredits)
-									.setIsCourseRequirement();
-	}
-	
-	public static Requirement newCreditRequirement(String name, int minCredits, String prefix, int minLevel) throws DataInputError {
+	public static Requirement newCreditRequirement(String name, int minCredits, List<String> prefix, int minLevel) throws DataInputError {
 		if(name == null || prefix == null) throw new DataInputError("Input arguments cannot be null.");
 		return new Requirement(name)
 									.setMinCredits(minCredits)
-									.setCoursePrefix(prefix)
-									.setMinLevel(minLevel)
-									.setIsCreditRequirement();
+									.setCoursePrefixes(prefix)
+									.setMinLevel(minLevel);
 	}
 	
 	public Requirement clone() throws CloneNotSupportedException {
-		if(isCourseRequirement) {
 			try {
-				return Requirement.newCourseRequirement(requirementName, coursePrefix, courseNumber, minCredits);
+				return Requirement.newCreditRequirement(requirementName, minCredits, coursePrefixes, minLevel);
 			} catch (DataInputError e) {
 				throw new CloneNotSupportedException("How the heck did this happen?");
 			}
-		} else if (isCreditRequirement) {
-			try {
-				return Requirement.newCreditRequirement(requirementName, minCredits, coursePrefix, minLevel);
-			} catch (DataInputError e) {
-				throw new CloneNotSupportedException("How the heck did this happen?");
-			}
-		} else {
-			throw new CloneNotSupportedException("Invalid requirement type!");
-		}
 	}
 
-	private Requirement setCourseNumber(Integer courseNumber) {
-		this.courseNumber = courseNumber;
-		return this;
-	}
 
 	private Requirement setMinCredits(Integer minCredits) {
 		this.minCredits = minCredits;
 		return this;
 	}
 
-	private Requirement setCoursePrefix(String coursePrefix) {
-		this.coursePrefix = coursePrefix;
+	private Requirement setCoursePrefixes(List<String> coursePrefix) {
+		this.coursePrefixes = coursePrefix;
 		return this;
 	}
 	
@@ -75,28 +48,23 @@ public class Requirement implements Cloneable {
 		return this;
 	}
 	
-	private Requirement setIsCourseRequirement() {
-		isCourseRequirement = true;
-		return this;
-	}
-	
-	private Requirement setIsCreditRequirement() {
-		isCreditRequirement = true;
-		return this;
-	}
-	
-	private boolean isCourseRequirementMet(StudentCourseHistory history) {
-		Character grade = history.getGrade(courseNumber, coursePrefix);
-		if(grade == null || grade == 'F') return false;
-		else return true;
-	}
 	
 	private boolean isCreditRequirementMet(StudentCourseHistory history) {
-		List<Course> courses = history.getCoursesWithPrefix(coursePrefix);
+		List<StudentCourse> courses;
+		if(coursePrefixes == null) courses = history.getEntireHistory();
+		else {
+			courses = new LinkedList<StudentCourse>();
+			for(String prefix : coursePrefixes) {
+				for(StudentCourse c : history.getCoursesWithPrefix(prefix)) {
+					courses.add(c);
+				}
+			}
+		}
+			
 		int creditsRemaining = minCredits;
-		for(Course c : courses) {
-			if(c.courseNumber < minLevel) continue;
-			else creditsRemaining -= c.creditHours;
+		for(StudentCourse c : courses) {
+			if(c.getCourse().getCourseNumber() < minLevel) continue;
+			else creditsRemaining -= c.getCourse().getCredits();
 		}
 		return creditsRemaining <= 0;
 	}
@@ -104,15 +72,9 @@ public class Requirement implements Cloneable {
 	public boolean isMet(Student theStudent) {
 		if(isMet != null) return isMet;
 		
-		boolean courseRequirementMet = !isCourseRequirement;
-		boolean creditRequirementMet = !isCreditRequirement;
-		
 		StudentCourseHistory history = theStudent.getCourseHistory();
 		
-		if(!courseRequirementMet) courseRequirementMet = isCourseRequirementMet(history);
-		if(!creditRequirementMet) creditRequirementMet = isCreditRequirementMet(history);
-		
-		if(courseRequirementMet && creditRequirementMet) return isMet = true;
+		if(isCreditRequirementMet(history)) return isMet = true;
 		else return isMet = false;
 	}
 	
@@ -121,12 +83,21 @@ public class Requirement implements Cloneable {
 	}
 	
 	protected void buildCourseList(List<Course> ret) {
-		if(isCreditRequirement) {
-			ret.add(new Course(minLevel, coursePrefix, minCredits, true));
+		for(String prefix : coursePrefixes) {
+			ret.add(new Course(minLevel, prefix, minCredits, true));
 		}
-		if(isCourseRequirement) {
-			ret.add(new Course(courseNumber, coursePrefix, minCredits, false));
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Requirement: "+this.getName()+"\n");
+		sb.append(this.minCredits+" credits at least "+this.minLevel+" level from these prefixes:\n");
+		Iterator<String> iter = this.coursePrefixes.iterator();
+		sb.append(iter.next());
+		while(iter.hasNext()) {
+			sb.append(" or "+iter.next());
 		}
+		return sb.toString();
 	}
 	
 }

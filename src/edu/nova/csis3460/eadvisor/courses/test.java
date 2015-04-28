@@ -18,7 +18,7 @@ public class test {
 		StudentCourse studentCourse4 = new StudentCourse(course4, course4.getPrefix(), "Winter 2015", 'B', course4.getCourseNumber());
 		StudentCourse studentCourse5 = new StudentCourse(course5, course5.getPrefix(), "Winter 2015", 'B', course5.getCourseNumber());
 		
-		Student stu1 = new Student("Chad", "Stewart", "N01234567");		
+		Student stu1 = new Student("Chad", "Stewart", 01234567);		
 		StudentCourseHistory studentCourseHistory1 = new StudentCourseHistory(stu1);		
 		studentCourseHistory1.addCourseToHistory(studentCourse1);
 		studentCourseHistory1.addCourseToHistory(studentCourse2);
@@ -27,7 +27,7 @@ public class test {
 		studentCourseHistory1.removeCoursesWithPrefixAndCourseNumber("MATH", 203550);
 		studentCourseHistory1.print();
 		
-		Student stu2 = new Student("Alec", "Torres", "N0blahblahblah");
+		Student stu2 = new Student("Alec", "Torres", 01234567);
 		StudentCourseHistory studentCourseHistory2 = new StudentCourseHistory(stu2);
 		studentCourseHistory2.addCourseToHistory(studentCourse2);
 		studentCourseHistory2.addCourseToHistory(studentCourse4);

@@ -12,4 +12,8 @@ public class DegreeProgram {
 	public RequirementsGroup getDegreeRequirements() throws CloneNotSupportedException {
 		return DEGREE_REQUIREMENTS.clone();
 	}
+	
+	public String getTitle(){
+		return NAME;
+	}
 }

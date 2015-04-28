@@ -2,27 +2,26 @@ package edu.nova.csis3460.eadvisor.requirements;
 
 import java.util.*;
 
-import edu.nova.csis3460.eadvisor.core.*;
 import edu.nova.csis3460.eadvisor.courses.*;
-import edu.nova.csis3460.eadvisor.plans.*;
+import edu.nova.csis3460.eadvisor.core.*;
 
 public class RequirementsGroup extends Requirement {
 	
-	private List<Requirement> andRequirements = new LinkedList<Requirement>();
-	private List<Requirement> orRequirements = new LinkedList<Requirement>();
+	protected List<Requirement> andRequirements = new LinkedList<Requirement>();
+	protected List<Requirement> orRequirements = new LinkedList<Requirement>();
 	
-	private Boolean isMet = null;
+	protected Boolean isMet = null;
 	
 	
 	public RequirementsGroup(String name) {
 		super(name);
 	}
 	
-	public void add_AND_Requirement(Requirement addMe) {
+	public void addANDRequirement(Requirement addMe) {
 		andRequirements.add(addMe);
 	}
 	
-	public void add_OR_Requirement(Requirement addMe) {
+	public void addORRequirement(Requirement addMe) {
 		orRequirements.add(addMe);
 	}
 	
@@ -43,10 +42,10 @@ public class RequirementsGroup extends Requirement {
 	public RequirementsGroup clone() throws CloneNotSupportedException {
 		RequirementsGroup copy = new RequirementsGroup(this.getName());
 		for(Requirement r : orRequirements) {
-			copy.add_OR_Requirement(r.clone());
+			copy.addORRequirement(r.clone());
 		}
 		for(Requirement r : andRequirements) {
-			copy.add_AND_Requirement(r.clone());
+			copy.addANDRequirement(r.clone());
 		}
 		return copy;
 	}
@@ -64,5 +63,44 @@ public class RequirementsGroup extends Requirement {
 		List<Course> ret = new LinkedList<Course>();
 		buildCourseList(ret);
 		return ret;
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Requirement temp;
+		Iterator<Requirement> iter;
+		sb.append("Requirement: "+this.getName()+"\n");
+		if(orRequirements.size() > 0) {
+			iter = orRequirements.iterator();
+			Requirement first = iter.next();
+			sb.append("--------------------\n");
+			sb.append(first.toString()+"\n");
+			sb.append("--------------------\n");
+			while(iter.hasNext()) {
+				sb.append("OR\n");
+				sb.append("--------------------\n");
+				sb.append(iter.next().toString()+"\n");
+				sb.append("--------------------\n");
+			}
+		}
+		
+		if(andRequirements.size() > 0) {
+			sb.append("OR\n");
+			sb.append("--------------------\n");
+			iter = andRequirements.iterator();
+			sb.append("--------------------\n");
+			sb.append(iter.next().toString()+"\n");
+			sb.append("--------------------\n");
+			while(iter.hasNext()) {
+				sb.append("AND");
+				sb.append("--------------------\n");
+				sb.append(iter.next().toString()+"\n");
+				sb.append("--------------------\n");
+			}
+			sb.append("--------------------\n");
+		}
+		
+		//last line
+		return sb.toString();
 	}
 }

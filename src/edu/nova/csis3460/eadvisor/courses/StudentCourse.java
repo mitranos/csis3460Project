@@ -36,4 +36,8 @@ public class StudentCourse
 	public Integer getCRN(){
 		return crn;
 	}
+	
+	public StudentCourse clone() {
+		return new StudentCourse(this.course, this.section, this.semester, this.grade, this.crn);
+	}
 }

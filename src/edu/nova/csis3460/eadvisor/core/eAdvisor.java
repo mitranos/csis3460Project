@@ -27,11 +27,12 @@ package edu.nova.csis3460.eadvisor.core;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import edu.nova.csis3460.eadvisor.courses.Course;
-import edu.nova.csis3460.eadvisor.requirements.DegreeProgram;
+import edu.nova.csis3460.eadvisor.courses.*;
+import edu.nova.csis3460.eadvisor.requirements.*;
 
 public class eAdvisor {
 
@@ -52,7 +53,7 @@ public class eAdvisor {
 	{
 		for (int i=0; i<this.courses.size();i++)
 		{
-			if (name == this.courses.get(i).getName())
+			if (name == this.courses.get(i).getTitle())
 			{
 				this.courses.remove(i);
 			}
@@ -63,21 +64,17 @@ public class eAdvisor {
 
 		for (int i=0; i<this.degreePrograms.size();i++)
 		{
-			System.out.println(this.degreePrograms.get(i).getName());
+			System.out.println(this.degreePrograms.get(i).getTitle());
 		}
 
 	}
 
 	public DegreeProgram searchDegree(String name) {
-		DegreeProgram dp= new DegreeProgram();
-		for (int i=0; i<this.degreePrograms.size();i++)
-		{
-			if (name == this.degreePrograms.get(i).getName())
-			{
-				dp= this.degreePrograms.get(i);
-			}
+		for (int i=0; i< degreePrograms.size();i++) {
+			if (name == this.degreePrograms.get(i).getTitle())
+				return this.degreePrograms.get(i);
 		}
-		return dp;
+		return null;
 	}
 
 	public Course getCourse(String name)
@@ -93,20 +90,15 @@ public class eAdvisor {
 		return course;
 	}
 
-	public CourseOffering getCourseOffering(String name)
+	public CourseOffering getCourseOffering(String name, Date date, int number)
 	{
-		CourseOffering co= new CourseOffering();
-		for (int i=0; i<this.courses.size();i++)
-		{
-			if (this.courses.get(i).getTitle() == name)
-			{
-				co= this.courses.get(i).getCourseOffering();
-			}
-		
+		for (int i=0; i<this.courses.size();i++) {
+			if (this.courses.get(i).getTitle().equals(name))
+				return this.courses.get(i).getCourseOffering(date, number);
+		}
+		return null;
 	}
-		return co;
-	}
-	
+	/*
 	public void maintainCourseOffering(String name)
 	{
 		
@@ -116,12 +108,12 @@ public class eAdvisor {
 		setCourseOffering(tempCo, name);
 		
 	}
-	
+	/*
 	public CourseOffering setCourseOffering(CourseOffering co, String name){
-		getCourseOffering(name) = co;
+		getCourseOffering(1) = co;
 	
 	}
-
+	 */
 	public void print(){
 
 		//main menu of the program
