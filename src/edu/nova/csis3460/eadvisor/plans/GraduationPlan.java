@@ -8,6 +8,7 @@ package edu.nova.csis3460.eadvisor.plans;
 
 import edu.nova.csis3460.eadvisor.courses.*;
 import edu.nova.csis3460.eadvisor.core.Student;
+import edu.nova.csis3460.eadvisor.exception.*;
 
 import java.util.*;
 
@@ -298,7 +299,7 @@ public class GraduationPlan {
 
     public static void main(String[] args)
     {
-        //GraduationPlan.test();
+        GraduationPlan.test();
     }
 
      

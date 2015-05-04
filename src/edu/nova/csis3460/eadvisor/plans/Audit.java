@@ -9,6 +9,7 @@ package edu.nova.csis3460.eadvisor.plans;
 
 import edu.nova.csis3460.eadvisor.courses.*;
 import edu.nova.csis3460.eadvisor.core.*;
+import edu.nova.csis3460.eadvisor.exception.*;
 
 import java.util.*;
 

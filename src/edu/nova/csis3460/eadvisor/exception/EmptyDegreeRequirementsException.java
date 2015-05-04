@@ -1,4 +1,6 @@
-package edu.nova.csis3460.eadvisor.plans;
+package edu.nova.csis3460.eadvisor.exception;
+
+import edu.nova.csis3460.eadvisor.exception.*;
 
 public class EmptyDegreeRequirementsException extends EAdvisorException {
 
