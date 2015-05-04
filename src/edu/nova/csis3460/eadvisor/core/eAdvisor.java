@@ -32,12 +32,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import edu.nova.csis3460.eadvisor.courses.*;
+import edu.nova.csis3460.eadvisor.main.Data;
 import edu.nova.csis3460.eadvisor.requirements.*;
 
 public class eAdvisor {
 
-	private ArrayList<DegreeProgram> degreePrograms = new ArrayList<DegreeProgram>();
-	private ArrayList<Course> courses = new ArrayList<Course>();
+	private static ArrayList<DegreeProgram> degreePrograms = new ArrayList<DegreeProgram>();
+	private static ArrayList<Course> courses = new ArrayList<Course>();
+	private static Data courseData = new Data();
 
 	public void addDegreeProgram(DegreeProgram degreeProgram)
 	{
@@ -153,6 +155,7 @@ public class eAdvisor {
 		eadvisor.print();
 	}
 	public static void main(String[] args) throws FileNotFoundException{
+		courses = (ArrayList<Course>) courseData.readFile();
 		eAdvisor.test();
 	} 
 }
